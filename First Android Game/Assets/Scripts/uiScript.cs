@@ -9,9 +9,12 @@ public class uiScript : MonoBehaviour
     GameManager gameManager;
     public TextMeshProUGUI scoreText;
 
+    private AdManager adManager;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        adManager = FindObjectOfType<AdManager>().GetComponent<AdManager>();
     }
     void Update()
     {
@@ -21,5 +24,6 @@ public class uiScript : MonoBehaviour
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        adManager.totalPlayed += 1;
     }
 }
