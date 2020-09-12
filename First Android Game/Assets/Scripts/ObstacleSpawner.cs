@@ -37,10 +37,10 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while(true)
         {
-            spawnDelay = gameManager.spawnSpeed;
-            obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
-            Instantiate(obstaclePrefabs[obstacleIndex], transform.position, transform.rotation);
             yield return new WaitForSeconds(spawnDelay);
+            spawnDelay = gameManager.obstacleSpawnSpeed;
+            obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
+            Instantiate(obstaclePrefabs[obstacleIndex], transform.position, transform.rotation);            
         }
     }
 }

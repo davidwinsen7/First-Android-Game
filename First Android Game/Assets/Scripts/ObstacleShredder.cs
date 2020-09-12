@@ -10,5 +10,9 @@ public class ObstacleShredder : MonoBehaviour
         {
             Destroy(collision.transform.parent.gameObject);
         }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     }
 
     [Range(0f,5f)]
-    public float spawnSpeed = 3f;
+    public float obstacleSpawnSpeed = 3f;
     [Range(0f, 5f)]
     public float obstacleSpeed = 2f;
 
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Management")]
     public GameObject gameoverUI;
+    public GameObject titleText;
     public TextMeshProUGUI highScore;
     public TextMeshProUGUI startGameHighScore;
     public TextMeshProUGUI endingScore;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
             startGameHighScore.transform.parent.gameObject.SetActive(false);
+            titleText.SetActive(false);
             FindObjectOfType<uiScript>().GetComponent<uiScript>().scoreText.gameObject.SetActive(true);
             Score += 5*Time.deltaTime;
             
