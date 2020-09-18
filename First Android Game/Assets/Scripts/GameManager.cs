@@ -52,15 +52,17 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
             startGameHighScore.transform.parent.gameObject.SetActive(false);
-            titleText.SetActive(false);
+            titleText.GetComponent<Animator>().SetBool("isGameplay", true);
             FindObjectOfType<uiScript>().GetComponent<uiScript>().scoreText.gameObject.SetActive(true);
             Score += 5*Time.deltaTime;
             
         }
         else if(state == gameState.Standby)
         {
-            Time.timeScale = 1f;
+            Time.timeScale = 1f;            
             FindObjectOfType<uiScript>().GetComponent<uiScript>().scoreText.gameObject.SetActive(false);
         }
     }
+
+    
 }
