@@ -5,6 +5,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private AudioManager auManager;
+
     public enum gameState
     {
         Standby, Gameplay, GameOver
@@ -16,11 +18,13 @@ public class GameManager : MonoBehaviour
     public float obstacleSpeed = 2f;
 
     [HideInInspector] public float Score = 0f;
+    float scoreCheckPoint = 0f;
 
     public gameState state = gameState.Standby;
 
 
     [Header("UI Management")]
+    public uiScript gameUI;
     public GameObject gameoverUI;
     public GameObject titleText;
     public TextMeshProUGUI highScore;
@@ -31,6 +35,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         startGameHighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString(); //Show high score in the start screen
+        gameUI = FindObjectOfType<uiScript>().GetComponent<uiScript>();
+        auManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
     }
     private void Update()
     {
@@ -55,6 +61,18 @@ public class GameManager : MonoBehaviour
             titleText.GetComponent<Animator>().SetBool("isGameplay", true);
             FindObjectOfType<uiScript>().GetComponent<uiScript>().scoreText.gameObject.SetActive(true);
             Score += 5*Time.deltaTime;
+
+            if((Score-scoreCheckPoint) >= 100f)
+            {
+                scoreCheckPoint += 100f;
+                auManager.Play("checkpoint");
+                gameUI.scoreText.GetComponent<Animator>().SetTrigger("checkPoint");
+                if (Score <= 401f)
+                {                    
+                    obstacleSpawnSpeed -= 0.1f;
+                }
+                
+            }
             
         }
         else if(state == gameState.Standby)

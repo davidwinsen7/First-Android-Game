@@ -33,13 +33,22 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+    int tutorialObstacle = 0;
     IEnumerator Spawn()
     {
         while(true)
         {
             yield return new WaitForSeconds(spawnDelay);
             spawnDelay = gameManager.obstacleSpawnSpeed;
-            obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
+            if(tutorialObstacle < 2)
+            {
+                obstacleIndex = Random.Range(0, 3);
+                tutorialObstacle++;
+            }
+            else
+            {
+                obstacleIndex = Random.Range(3, obstaclePrefabs.Length);
+            }            
             Instantiate(obstaclePrefabs[obstacleIndex], transform.position, transform.rotation);            
         }
     }

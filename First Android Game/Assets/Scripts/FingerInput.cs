@@ -60,7 +60,7 @@ public class FingerInput : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log("Collided with an obstacle!");
+            //Debug.Log("Collided with an obstacle!");
             auManager.Play("obstacleHit");
             adManager.totalPlayed += 1;               
             gameManager.state = GameManager.gameState.GameOver;
