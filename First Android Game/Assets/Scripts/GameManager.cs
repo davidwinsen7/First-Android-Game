@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             startGameHighScore.transform.parent.gameObject.SetActive(false);
             titleText.GetComponent<Animator>().SetBool("isGameplay", true);
+            GameObject.Find("Settings Button").GetComponent<Animator>().SetBool("isGameplay", true);
             FindObjectOfType<uiScript>().GetComponent<uiScript>().scoreText.gameObject.SetActive(true);
             Score += 5*Time.deltaTime;
 

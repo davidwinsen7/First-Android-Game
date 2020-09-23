@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FingerInput : MonoBehaviour
 {
@@ -25,35 +27,41 @@ public class FingerInput : MonoBehaviour
             auManager.Stop("Gameplay");
 
         if(Input.touchCount > 0) //Check if there's any touch input
-        {
+        {           
             Touch touch = Input.GetTouch(0); //get the touch input from the first finger
             Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position); //get the finger position
             touchPos.z = 0f;
 
-            transform.position = touchPos; //set object position to follow finger position
+            if(gameManager.state == GameManager.gameState.Gameplay)
+                transform.position = touchPos; //set object position to follow finger position
 
-            switch (touch.phase)
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)) //Ignore touch input over UI e.g. button
             {
-                case TouchPhase.Began:
-                    Debug.Log("Touch Began");
-                    if(gameManager.state == GameManager.gameState.Standby)
-                    {
-                        gameManager.state = GameManager.gameState.Gameplay;
-                        auManager.Stop("Standby");
-                        auManager.Play("swoosh");
-                        auManager.Play("Gameplay");
-                    }
-                    
-                    touchToPlayUI.SetActive(false);
-                    break;
-                case TouchPhase.Ended:
-                    Debug.Log("Touch Ended");
-                    if(gameManager.state == GameManager.gameState.Gameplay)
-                        adManager.totalPlayed += 1;
-                    gameManager.state = GameManager.gameState.GameOver;                    
-                    trail.enabled = false;
-                    break;
-            }
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        Debug.Log("Touch Began");
+                        if (gameManager.state == GameManager.gameState.Standby)
+                        {
+                            gameManager.state = GameManager.gameState.Gameplay;
+                            auManager.Stop("Standby");
+                            auManager.Play("swoosh");
+                            auManager.Play("Gameplay");
+                        }
+
+                        touchToPlayUI.SetActive(false);
+                        break;
+                    case TouchPhase.Ended:
+                        Debug.Log("Touch Ended");
+                        if (gameManager.state == GameManager.gameState.Gameplay)
+                        {
+                            adManager.totalPlayed += 1;
+                            gameManager.state = GameManager.gameState.GameOver;
+                            trail.enabled = false;
+                        }
+                        break;
+                }
+            }           
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
