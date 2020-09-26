@@ -6,6 +6,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private AudioManager auManager;
+    public Camera mainCamera;
+    private Animator camAnim;
 
     public enum gameState
     {
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("UI Management")]
-    public uiScript gameUI;
+    private uiScript gameUI;
     public GameObject gameoverUI;
     public GameObject titleText;
     public TextMeshProUGUI highScore;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
         startGameHighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString(); //Show high score in the start screen
         gameUI = FindObjectOfType<uiScript>().GetComponent<uiScript>();
         auManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
+        camAnim = mainCamera.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
                 scoreCheckPoint += 100f;
                 auManager.Play("checkpoint");
                 gameUI.scoreText.GetComponent<Animator>().SetTrigger("checkPoint");
+                camAnim.SetTrigger("Shake1");
                 if (Score <= 401f)
                 {                    
                     obstacleSpawnSpeed -= 0.1f;
