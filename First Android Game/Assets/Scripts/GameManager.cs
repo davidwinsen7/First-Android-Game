@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -88,4 +89,11 @@ public class GameManager : MonoBehaviour
     }
 
     
+    /*Developers debugging mode*/
+    public void resetScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+    }
+    
+
 }

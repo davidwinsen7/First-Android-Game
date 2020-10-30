@@ -59,6 +59,11 @@ public class uiScript : MonoBehaviour
         auManager.Play("buttonTap");
     }
 
+    public void openSupportPage()
+    {
+        Application.OpenURL("https://davidwinsen7.wixsite.com/site/jet-finger/jet-finger-support");
+    }
+
     public void closeCredits()
     {
         creditsUI.SetActive(false);
