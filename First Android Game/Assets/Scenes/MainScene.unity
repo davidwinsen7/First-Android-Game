@@ -2906,7 +2906,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5b0504b81b22b534ab3ad8aed3a36a5d, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -3481,7 +3481,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 56a917dafb3e05b47b469783b0a55212, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -6150,7 +6150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalPlayed: 0
   totalPlayBeforeAds: 5
-  isTestMode: 1
+  isTestMode: 0
 --- !u!4 &1887609423
 Transform:
   m_ObjectHideFlags: 0
